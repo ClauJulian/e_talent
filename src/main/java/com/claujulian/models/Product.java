@@ -49,26 +49,5 @@ public class Product {
         return sb.toString();
     }
 
-    public void creaProducto() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void eliminaProducto() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void modificaProducto() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void buscaProductoPorId() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void listaProducto() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-
-
+   
 }

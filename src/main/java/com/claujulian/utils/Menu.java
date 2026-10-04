@@ -2,7 +2,7 @@ package com.claujulian.utils;
 
 import java.util.Scanner;
 
-import com.claujulian.models.Product;
+import com.claujulian.services.ProductService;
 
 public class Menu {
     Scanner scanner = new Scanner(System.in);
@@ -11,8 +11,8 @@ public class Menu {
 
             1 - Crea un nuevo producto
             2 - Elimina un producto     
-            4 - Modifica un producto
-            3 - Busca un producto por su id
+            3 - Modifica un producto
+            4 - Busca un producto por su id
             5 - Lista los productos
 
             0 - Salir
@@ -20,7 +20,7 @@ public class Menu {
             """;
     int opcionMenu;
 
-    Product product = new Product();
+    ProductService productService = new ProductService();
 
     public void mostrarMenu() {
         do {
@@ -28,20 +28,20 @@ public class Menu {
             opcionMenu = scanner.nextInt();
 
             switch (opcionMenu) {
-             case 1:
-                    product.creaProducto();
+                case 1:
+                    productService.creaProducto();
                     break;
                 case 2:
-                    product.eliminaProducto();
+                    productService.eliminaProducto();
                     break;
                 case 3:
-                    product.modificaProducto();
+                    productService.modificaProducto();
                     break;
                 case 4:
-                    product.buscaProductoPorId();
+                    productService.buscarProductoPorNombre();
                     break;
                 case 5:
-                    product.listaProducto();
+                    productService.listaProducto();
                     break;
     
                 default:
