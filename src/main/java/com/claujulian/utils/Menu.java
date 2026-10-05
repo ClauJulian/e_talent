@@ -12,7 +12,7 @@ public class Menu {
             1 - Crea un nuevo producto
             2 - Elimina un producto     
             3 - Modifica un producto
-            4 - Busca un producto por su id
+            4 - Busca un producto por nombre
             5 - Lista los productos
 
             0 - Salir

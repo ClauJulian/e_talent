@@ -23,7 +23,9 @@ public class ProductService {
         Double precio = scanner.nextDouble();
         scanner.nextLine();
 
-        Product product = new Product(nombre, stock, precio);
+        int id = productos.size()+1;
+
+        Product product = new Product(id, nombre, stock, precio);
         productos.add(product);
 
         System.out.println("\nProducto creado correctamente.");      
@@ -50,7 +52,6 @@ public class ProductService {
     public Product buscarProductoPorNombre() {        
         System.out.println("Ingrese el nombre del producto: ");
         String nombre = scanner.nextLine();
-        
         for (Product product : productos) {
             if (product.getNombre().equalsIgnoreCase(nombre)) {
                 System.out.println("\nProducto encontrado:");
@@ -74,8 +75,6 @@ public class ProductService {
         System.out.println("\nProducto encontrado:");
         System.out.println(product);
 
-        System.out.println("\nIngrese el nuevo nombre:");
-        String nuevoNombre = scanner.nextLine();
 
         System.out.println("\nIngrese el nuevo stock:");
         Integer nuevoStock = scanner.nextInt();
@@ -85,7 +84,6 @@ public class ProductService {
         Double nuevoPrecio = scanner.nextDouble();
         scanner.nextLine();
 
-        product.setNombre(nuevoNombre);
         product.setStock(nuevoStock);
         product.setPrecio(nuevoPrecio);
 
@@ -96,7 +94,6 @@ public class ProductService {
     public void listaProducto() {
         if (productos.isEmpty()) {
             System.out.println("\nNo hay productos registrados.");
-            return;
         }
     
         System.out.println("\n===== LISTADO DE PRODUCTOS =====");

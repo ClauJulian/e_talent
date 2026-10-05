@@ -1,13 +1,14 @@
 package com.claujulian.models;
 
 public class Product {
-    private Integer id;
+    private int id;
     private String nombre;
     private Integer stock;
     private Double precio;
 
     public Product(){}
-    public Product(String nombre, Integer stock,Double precio){
+    public Product(int id,String nombre, Integer stock,Double precio){
+        this.id = id;
         this.nombre=nombre;
         this.stock=stock;
         this.precio=precio;
@@ -41,7 +42,7 @@ public class Product {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Product{");
-        //sb.append("id=").append(id);
+        sb.append("id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", stock=").append(stock);
         sb.append(", precio=").append(precio);
