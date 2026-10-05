@@ -2,6 +2,7 @@ package com.claujulian.utils;
 
 import java.util.Scanner;
 
+import com.claujulian.exceptions.ProductNotFoundException;
 import com.claujulian.services.ProductService;
 
 public class Menu {
@@ -22,7 +23,7 @@ public class Menu {
 
     ProductService productService = new ProductService();
 
-    public void mostrarMenu() {
+    public void mostrarMenu() throws ProductNotFoundException {
         do {
             System.out.println(menu);
             opcionMenu = scanner.nextInt();

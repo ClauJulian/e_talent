@@ -1,6 +1,6 @@
 package com.claujulian.models;
 
-public class Product {
+public class Product{
     private int id;
     private String nombre;
     private Integer stock;
@@ -41,12 +41,12 @@ public class Product {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Product{");
+        sb.append("---------------------------");
+        sb.append("Product: ");
         sb.append("id=").append(id);
         sb.append(", nombre=").append(nombre);
         sb.append(", stock=").append(stock);
         sb.append(", precio=").append(precio);
-        sb.append('}');
         return sb.toString();
     }
 

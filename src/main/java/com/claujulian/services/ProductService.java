@@ -1,19 +1,24 @@
 package com.claujulian.services;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.claujulian.exceptions.InvalidProductException;
+import com.claujulian.exceptions.ProductNotFoundException;
 import com.claujulian.models.Product;
 
-public class ProductService {
-    Scanner scanner = new Scanner(System.in);
-    private List<Product> productos = new ArrayList<>();
+public class ProductService{
+    private final Scanner scanner = new Scanner(System.in);
+    private final List<Product> productos = new ArrayList<>();
+    private int siguienteId = 1;
     
     // Crea Producto
     public void creaProducto() {
+        try{
         System.out.println("\nIngrese nombre del producto:");
-        String nombre = scanner.nextLine();
+        String nombre = scanner.nextLine().trim();
 
         System.out.println("\nIngrese stock del producto:");
         Integer stock = scanner.nextInt();
@@ -23,33 +28,37 @@ public class ProductService {
         Double precio = scanner.nextDouble();
         scanner.nextLine();
 
-        int id = productos.size()+1;
+        validarDatos(nombre, stock, precio);
 
-        Product product = new Product(id, nombre, stock, precio);
+
+        Product product = new Product(siguienteId++, nombre, stock, precio);
         productos.add(product);
 
-        System.out.println("\nProducto creado correctamente.");      
+        System.out.println("\nProducto creado correctamente."); 
+
+    }catch (InputMismatchException e) {
+        scanner.nextLine(); 
+        System.out.println("\nError: debe ingresar un valor numérico válido.");
+    } catch (InvalidProductException e) {
+        System.out.println("\nError: " + e.getMessage());
+    }     
     }
 
     // Elimina Producto por Nombre
     public void eliminaProducto() {
-
+        try {
         Product product = buscarProductoPorNombre();
-
-        if (product == null) {
-        System.out.println("\nNo se encontró el producto.");
-        return;
-        }
-
         productos.remove(product);
-
         System.out.println("\nProducto eliminado correctamente.");
+        } catch (ProductNotFoundException e){
+        System.out.println("\nError: " + e.getMessage());
+        }
     }
 
     
 
     // Busca Producto por Nombre
-    public Product buscarProductoPorNombre() {        
+    public Product buscarProductoPorNombre() throws ProductNotFoundException {        
         System.out.println("Ingrese el nombre del producto: ");
         String nombre = scanner.nextLine();
         for (Product product : productos) {
@@ -59,22 +68,16 @@ public class ProductService {
                 return product;
             }
         }
-        return null;
+        throw new ProductNotFoundException(nombre);
     }
 
     // Modificar Producto Por Nombre
     public void modificaProducto() {
-
+        try{
         Product product = buscarProductoPorNombre();
-
-        if (product == null) {
-        System.out.println("\nNo se encontró el producto.");
-        return;
-        }
 
         System.out.println("\nProducto encontrado:");
         System.out.println(product);
-
 
         System.out.println("\nIngrese el nuevo stock:");
         Integer nuevoStock = scanner.nextInt();
@@ -84,22 +87,45 @@ public class ProductService {
         Double nuevoPrecio = scanner.nextDouble();
         scanner.nextLine();
 
+        validarDatos(product.getNombre(), nuevoStock, nuevoPrecio);
+        
         product.setStock(nuevoStock);
         product.setPrecio(nuevoPrecio);
 
         System.out.println("\nProducto modificado correctamente.");
+    
+    } catch (ProductNotFoundException | InvalidProductException e) {
+        System.out.println("\nError: " + e.getMessage());
+    } catch (InputMismatchException e) {
+        scanner.nextLine();
+        System.out.println("\nError: debe ingresar un valor numérico válido.");
+    }
     }
 
     // Lista Productos
     public void listaProducto() {
         if (productos.isEmpty()) {
             System.out.println("\nNo hay productos registrados.");
+            return;
         }
     
         System.out.println("\n===== LISTADO DE PRODUCTOS =====");
     
         for (Product product : productos) {
             System.out.println(product);
+        }
+    }
+
+     // Validaciones reutilizables
+     private void validarDatos(String nombre, Integer stock, Double precio) throws InvalidProductException {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new InvalidProductException("El nombre no puede estar vacío.");
+        }
+        if (stock < 0) {
+            throw new InvalidProductException("El stock no puede ser negativo.");
+        }
+        if (precio < 0) {
+            throw new InvalidProductException("El precio no puede ser negativo.");
         }
     }
 
