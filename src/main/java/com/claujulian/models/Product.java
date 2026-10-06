@@ -41,7 +41,7 @@ public class Product{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("---------------------------");
+        sb.append("---------------------------\n");
         sb.append("Product: ");
         sb.append("id=").append(id);
         sb.append(", nombre=").append(nombre);

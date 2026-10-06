@@ -76,9 +76,6 @@ public class ProductService{
         try{
         Product product = buscarProductoPorNombre();
 
-        System.out.println("\nProducto encontrado:");
-        System.out.println(product);
-
         System.out.println("\nIngrese el nuevo stock:");
         Integer nuevoStock = scanner.nextInt();
         scanner.nextLine();

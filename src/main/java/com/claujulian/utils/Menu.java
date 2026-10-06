@@ -46,7 +46,7 @@ public class Menu {
                     break;
     
                 default:
-                    System.out.println("\n:: Gestión de Pedidos terminada");
+                    System.out.println("\n:: Gracias, su sesión ha terminado");
             }
         } while (opcionMenu != 0);
     }
